@@ -1,0 +1,9 @@
+com\automation\pageObjects\NewCustomer.class
+com\automation\testCases\BaseClass.class
+com\automation\utilities\XLUtils.class
+com\automation\testCases\TC_LoginTest_001.class
+com\automation\testCases\TC_AddCustomer_003.class
+com\automation\pageObjects\LoginPage.class
+com\automation\testCases\TC_LoginDDT_002.class
+com\automation\utilities\ReadConfig.class
+com\automation\utilities\Reporting.class
