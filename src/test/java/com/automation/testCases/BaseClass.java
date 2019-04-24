@@ -11,8 +11,6 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.firefox.ProfilesIni;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterTest;
@@ -45,18 +43,18 @@ public class BaseClass {
 			driver = new ChromeDriver();
 
 		} else if ("firefox".equals(brwsr)) {
-			ProfilesIni prof = new ProfilesIni();
-			FirefoxProfile ffProfile = prof.getProfile("automation");
-			logger.info("Exiting FF profile");
-			if (ffProfile != null) {
-				logger.info("Going to accept certificate");
-				ffProfile.setAcceptUntrustedCertificates(true);
-				logger.info("Certificate Accepted");
-				ffProfile.setAssumeUntrustedCertificateIssuer(false);
+//			ProfilesIni prof = new ProfilesIni();
+//			FirefoxProfile ffProfile = prof.getProfile("automation");
+//			logger.info("Exiting FF profile");
+//			if (ffProfile != null) {
+//				logger.info("Going to accept certificate");
+//				ffProfile.setAcceptUntrustedCertificates(true);
+//				logger.info("Certificate Accepted");
+//				ffProfile.setAssumeUntrustedCertificateIssuer(false);
 //				System.setProperty("webdriver.gecko.driver", rc.getFirefoxPath());
-				System.setProperty("webdriver.firefox.marionette", rc.getFirefoxPath());
+				System.setProperty("webdriver.gecko.driver", rc.getFirefoxPath());
 				driver = new FirefoxDriver();
-			}
+//			}
 		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseURL);
