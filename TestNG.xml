@@ -5,7 +5,7 @@
 	<listeners>
 		<listener class-name="com.automation.utilities.Reporting" />
 	</listeners>
-	<parameter name="browser" value="chrome" />
+	<parameter name="browser" value="firefox" />
 	<test name="AutomationTesting">
 		<classes>
 			<!-- <class name="com.automation.testCases.TC_LoginTest_001" /> -->

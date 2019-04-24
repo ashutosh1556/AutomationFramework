@@ -38,19 +38,25 @@ public class BaseClass {
 		logger = Logger.getLogger("BaseClass");
 		PropertyConfigurator.configure("log4j.properties");
 
-		if (brwsr.equals("chrome")) {
+		if ("chrome".equals(brwsr)) {
 			DesiredCapabilities handlSSLErr = DesiredCapabilities.chrome();
 			handlSSLErr.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			System.setProperty("webdriver.chrome.driver", rc.getChromePath());
 			driver = new ChromeDriver();
 
-		} else if (brwsr.equals("firefox")) {
+		} else if ("firefox".equals(brwsr)) {
 			ProfilesIni prof = new ProfilesIni();
 			FirefoxProfile ffProfile = prof.getProfile("automation");
-			ffProfile.setAcceptUntrustedCertificates(true);
-			ffProfile.setAssumeUntrustedCertificateIssuer(false);
-			System.setProperty("webdriver.gecko.driver", rc.getFirefoxPath());
-			driver = new FirefoxDriver();
+			logger.info("Exiting FF profile");
+			if (ffProfile != null) {
+				logger.info("Going to accept certificate");
+				ffProfile.setAcceptUntrustedCertificates(true);
+				logger.info("Certificate Accepted");
+				ffProfile.setAssumeUntrustedCertificateIssuer(false);
+//				System.setProperty("webdriver.gecko.driver", rc.getFirefoxPath());
+				System.setProperty("webdriver.firefox.marionette", rc.getFirefoxPath());
+				driver = new FirefoxDriver();
+			}
 		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.get(baseURL);
