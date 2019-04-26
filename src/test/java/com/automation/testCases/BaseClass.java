@@ -63,7 +63,7 @@ public class BaseClass {
 	}
 
 	@BeforeMethod
-	public String excelPath() {
+	public static String excelPath() {
 		String path = (System.getProperty("user.dir") + "/src/test/java/com/automation/testData/TestData.xlsx");
 		return path;
 	}

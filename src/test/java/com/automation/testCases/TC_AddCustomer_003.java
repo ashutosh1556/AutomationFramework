@@ -46,6 +46,7 @@ public class TC_AddCustomer_003 extends BaseClass {
 
 	String randomEmail = RandomStringUtils.randomAlphanumeric(8);
 
-// @DataProvider(name="AddCustomer")
+// @DataProvider(name="TestData")
+	
 
 }
