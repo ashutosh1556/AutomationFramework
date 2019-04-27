@@ -1,8 +1,10 @@
 package com.automation.utilities;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -17,11 +19,20 @@ public class XLUtils {
 	public static XSSFSheet ws;
 	public static XSSFRow row;
 	public static XSSFCell cell;
+	public static File filepath;
+
+	public static void loadExcel() throws Exception {
+		filepath = new File(System.getProperty("user.dir") + "/src/test/java/com/automation/testData/TestData.xlsx");
+		fis = new FileInputStream(filepath);
+		wb = new XSSFWorkbook(fis);
+		ws = wb.getSheet("Sheet1");
+		fis.close();
+	}
 
 	public static int getRowCount(String xlfile, String xlsheet) throws IOException {
 		fis = new FileInputStream(xlfile);
 		wb = new XSSFWorkbook(fis);
-		ws = wb.getSheet(xlsheet);				
+		ws = wb.getSheet(xlsheet);
 		int rowCount = ws.getLastRowNum();
 		wb.close();
 		fis.close();
