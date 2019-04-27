@@ -15,11 +15,9 @@ public class LoginPage {
 	}
 
 	@FindBy(name = "uid")
-	// @CacheLookup
 	WebElement txtuserName;
 
 	@FindBy(name = "password")
-	// @CacheLookup
 	WebElement txtPassword;
 
 	@FindBy(name = "btnLogin")

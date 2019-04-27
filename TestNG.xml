@@ -9,8 +9,9 @@
 	<test name="AutomationTesting">
 		<classes>
 			<!-- <class name="com.automation.testCases.TC_LoginTest_001" /> -->
-			<class name="com.automation.testCases.TC_LoginDDT_002" />
+			<!-- <class name="com.automation.testCases.TC_LoginDDT_002" />  -->
 			<!-- <class name="com.automation.testCases.TC_AddCustomer_003" /> -->
+			<class name="com.automation.testCases.TC_LoginWithHashmap_004" />
 		</classes>
 	</test>
 </suite>

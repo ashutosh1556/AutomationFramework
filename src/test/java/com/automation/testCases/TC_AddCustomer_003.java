@@ -1,30 +1,33 @@
 package com.automation.testCases;
 
-import java.io.IOException;
+import java.util.Map;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
 import com.automation.pageObjects.LoginPage;
 import com.automation.pageObjects.NewCustomer;
 
 public class TC_AddCustomer_003 extends BaseClass {
 
-	@Test(dependsOnMethods = { "com.automation.testCases.TC_LoginDDT_002.login" })
-	public void addCustDetails() throws IOException {
-		NewCustomer nec = new NewCustomer(driver);
+	NewCustomer nec = new NewCustomer(driver);
+
+	@Test(dataProvider = "TestData", dependsOnMethods = { "com.automation.testCases.TC_LoginWithHashmap_004.login" })
+	public void addCustDetails(Map<String, String> map) throws Exception {
 		nec.newCustPage();
-		nec.setCustName("Test User");
-		nec.setCustGender("Male");
-		nec.setCustDob("01-01-1985");
-		nec.setCustAdd("Sector 24");
-		nec.setCustCity("Gurugram");
-		nec.setCustState("Haryana");
-		nec.setCustPin("122002");
-		nec.setCustMob("1234567890");
+		nec.setCustName(map.get("setCustName"));
+		nec.setCustGender(map.get("setCustGender"));
+		nec.setCustDob(map.get("setCustDob"));
+		nec.setCustAdd(map.get("setCustAdd"));
+		nec.setCustCity(map.get("setCustCity"));
+		nec.setCustState(map.get("setCustState"));
+		nec.setCustPin(map.get("setCustPin"));
+		nec.setCustMob(map.get("setCustMob"));
+		String randomEmail = RandomStringUtils.randomAlphanumeric(8);
 		String email = randomEmail + "@gmail.com";
 		nec.setCustEmail(email);
-		nec.setCustPass("123456");
+		nec.setCustPass(map.get("setCustPass"));
 		nec.btnSubmit();
 
 		try {
@@ -43,10 +46,4 @@ public class TC_AddCustomer_003 extends BaseClass {
 		driver.switchTo().alert().accept();
 		driver.switchTo().defaultContent();
 	}
-
-	String randomEmail = RandomStringUtils.randomAlphanumeric(8);
-
-// @DataProvider(name="TestData")
-	
-
 }
