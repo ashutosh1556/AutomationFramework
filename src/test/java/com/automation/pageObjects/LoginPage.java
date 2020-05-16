@@ -7,38 +7,38 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-	WebDriver ldriver;
+    WebDriver driver;
 
-	public LoginPage(WebDriver rdriver) {
-		ldriver = rdriver;
-		PageFactory.initElements(rdriver, this);
-	}
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
 
-	@FindBy(name = "uid")
-	WebElement txtuserName;
+    @FindBy(name = "uid")
+    WebElement txtUserName;
 
-	@FindBy(name = "password")
-	WebElement txtPassword;
+    @FindBy(name = "password")
+    WebElement txtPassword;
 
-	@FindBy(name = "btnLogin")
-	WebElement btnLogin;
+    @FindBy(xpath = "//ul/a")
+    WebElement btnLogin;
 
-	@FindBy(xpath = "/html/body/div[3]/div/ul/li[15]/a")
-	WebElement btnLogout;
+    @FindBy(xpath = "//ul/a")
+    WebElement btnLogout;
 
-	public void setUserName(String uname) {
-		txtuserName.sendKeys(uname);
-	}
+    public void setUserName(String userName) {
+        txtUserName.sendKeys(userName);
+    }
 
-	public void setPassword(String pwd) {
-		txtPassword.sendKeys(pwd);
-	}
+    public void setPassword(String passWord) {
+        txtPassword.sendKeys(passWord);
+    }
 
-	public void clickSubmit() {
-		btnLogin.click();
-	}
+    public void clickLogin() {
+        btnLogin.click();
+    }
 
-	public void clickLogout() {
-		btnLogout.click();
-	}
+    public void clickLogout() {
+        btnLogout.click();
+    }
 }

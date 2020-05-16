@@ -5,41 +5,36 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 public class ReadConfig {
-	Properties pro;
+    Properties pro;
 
-	public ReadConfig() {
-		File src = new File("./Configuration\\Config.properties");
-		try {
-			FileInputStream fis = new FileInputStream(src);
-			pro = new Properties();
-			pro.load(fis);
-		} catch (Exception e) {
-			System.out.println("Exception is: " + e.getMessage());
-		}
-	}
+    public ReadConfig() {
+        File src = new File("Configuration/Config.properties");
+        try {
+            FileInputStream fis = new FileInputStream(src);
+            pro = new Properties();
+            pro.load(fis);
+        } catch (Exception e) {
+            System.out.println("Exception is: " + e.getMessage());
+        }
+    }
 
-	public String getBaseUrl() {
-		String url = pro.getProperty("baseURL");
-		return url;
-	}
+    public String getBaseUrl() {
+        return pro.getProperty("baseURL");
+    }
 
-	public String getUserName() {
-		String userName = pro.getProperty("userName");
-		return userName;
-	}
+    public String getUserName() {
+        return pro.getProperty("userName");
+    }
 
-	public String getPassword() {
-		String userPasssword = pro.getProperty("userPassword");
-		return userPasssword;
-	}
+    public String getPassword() {
+        return pro.getProperty("userPassword");
+    }
 
-	public String getChromePath() {
-		String chromepath = pro.getProperty("chromepath");
-		return chromepath;
-	}
+    public String getChromePath() {
+        return pro.getProperty("chromePath");
+    }
 
-	public String getFirefoxPath() {
-		String firefoxpath = pro.getProperty("firefoxpath");
-		return firefoxpath;
-	}
+    public String getFirefoxPath() {
+        return pro.getProperty("firefoxPath");
+    }
 }

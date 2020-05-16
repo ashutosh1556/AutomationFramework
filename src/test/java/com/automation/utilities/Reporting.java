@@ -1,72 +1,75 @@
 package com.automation.utilities;
 
-import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.reporter.ExtentAventReporter;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
-import com.aventstack.extentreports.reporter.configuration.Theme;
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Reporting extends TestListenerAdapter {
 
-	ExtentHtmlReporter htmlReporter;
-	ExtentReports extent;
-	ExtentTest logger;
+    ExtentSparkReporter extentSparkReporter;
+    ExtentReports extentReports;
+    ExtentTest extentTest;
 
-	public void onStart(ITestContext textcontext) {
-		String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
-		String repname = "Test-Report" + timestamp + ".html";
+    public void onStart(ITestContext textContext) {
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        String reportName = "TestReport_" + timeStamp + ".html";
 
-		htmlReporter = new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/" + repname);
-		htmlReporter.loadXMLConfig(System.getProperty("user.dir") + "/extent-config.xml/");
+        extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-output/" + reportName);
+        extentSparkReporter.loadXMLConfig(System.getProperty("user.dir") + "/spark-config.xml/");
 
-		extent = new ExtentReports();
-		extent.attachReporter(htmlReporter);
-		extent.setSystemInfo("Hostname", "Ald-Edge Server");
-		extent.setSystemInfo("Environment", "8081");
-		extent.setSystemInfo("User", "Ashutosh Verma");
+        extentReports = new ExtentReports();
+        extentReports.attachReporter(extentSparkReporter);
+        extentReports.setSystemInfo("Hostname", "TIMES CARD");
+        extentReports.setSystemInfo("Environment", "Staging");
+        extentReports.setSystemInfo("User", "Ashutosh Verma");
 
-		htmlReporter.config().setDocumentTitle("Automation Report");
-		htmlReporter.config().setReportName("Automation report");
-		htmlReporter.config().setTheme(Theme.STANDARD);
-	}
+        extentSparkReporter.config().setDocumentTitle("Automation test report");
+        extentSparkReporter.config().setReportName("Test results");
+        extentSparkReporter.config().setTheme(Theme.STANDARD);
+    }
 
-	public void onTestSuccess(ITestResult tr) {
-		logger = extent.createTest(tr.getName());
-		logger.log(Status.PASS, MarkupHelper.createLabel(tr.getName(), ExtentColor.GREEN));
-	}
+    public void onTestSuccess(ITestResult tcName) {
+        extentTest = extentReports.createTest(tcName.getName());
+        extentTest.log(Status.PASS, MarkupHelper.createLabel(tcName.getName(), ExtentColor.GREEN));
+    }
 
-	public void onTestFailure(ITestResult tr) {
-		logger = extent.createTest(tr.getName());
-		logger.log(Status.FAIL, MarkupHelper.createLabel(tr.getName(), ExtentColor.RED));
+    public void onTestFailure(ITestResult tcName) {
+        extentTest = extentReports.createTest(tcName.getName());
+        extentTest.log(Status.FAIL, MarkupHelper.createLabel(tcName.getName(), ExtentColor.RED));
 
-		String screenShotPath = System.getProperty("user.dir") + "/Screenshots/" + tr.getName() + ".png";
-		File image = new File(screenShotPath);
+        String imagePath = System.getProperty("user.dir") + "/Screenshots/" + tcName.getName() + ".png";
+        File imageAtPath = new File(imagePath);
 
-		if (image.exists()) {
-			try {
-				logger.fail("Screenshot is below: " + logger.addScreenCaptureFromPath(screenShotPath));
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
+        if (imageAtPath.exists()) {
+            try {
+//                extentTest.fail(tcName.getThrowable().getMessage() + extentTest.addScreenCaptureFromPath(imagePath));
+//                extentTest.fail(tcName.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(imagePath).build());
+                extentTest.fail(tcName.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath("/Users/ashutosh.verma1/IdeaProjects/AutomationFramework/Screenshots/loginTest.png").build());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
-	public void onTestSkip(ITestResult tr) {
-		logger = extent.createTest(tr.getName());
-		logger.log(Status.SKIP, MarkupHelper.createLabel(tr.getName(), ExtentColor.ORANGE));
-	}
+    public void onTestSkipped(ITestResult tr) {
+        extentTest = extentReports.createTest(tr.getName());
+        extentTest.log(Status.SKIP, MarkupHelper.createLabel(tr.getName(), ExtentColor.ORANGE));
+    }
 
-	public void onFinish(ITestContext tr) {
-		extent.flush();
-	}
+    public void onFinish(ITestContext tr) {
+        extentReports.flush();
+    }
 }

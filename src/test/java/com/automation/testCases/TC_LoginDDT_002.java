@@ -18,7 +18,7 @@ public class TC_LoginDDT_002 extends BaseClass {
 		logger.info("UserName Entered");
 		lp.setPassword(pwd);
 		logger.info("Password Entered");
-		lp.clickSubmit();
+		lp.clickLogin();
 		logger.info("Submitted");
 
 		if (isAlertPresent()) {

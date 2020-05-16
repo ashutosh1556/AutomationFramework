@@ -17,14 +17,14 @@ public class TC_LoginTest_001 extends BaseClass {
 		logger.info("Entered Username");
 		lp.setPassword(userPassword);
 		logger.info("Entered Passsword");
-		lp.clickSubmit();
+		lp.clickLogin();
 
 		if (driver.getTitle().equals("Guru99 Bank Manager HomePage")) {
 			Assert.assertTrue(true);
 			logger.info("Title matched");
 		} else {
 			try {
-				captureScreeshot(driver, "loginTest");
+				captureScreenshot(driver, "loginTest");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

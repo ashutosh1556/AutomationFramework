@@ -34,7 +34,7 @@ public class TC_AddCustomer_003 extends BaseClass {
 			String actual = nec.getTableHeading();
 			String expected = "Customer Registered Successfully123!!!";
 			Assert.assertEquals(actual, expected);
-			captureScreeshot(driver, "addCustDetails");
+			captureScreenshot(driver, "addCustDetails");
 			logger.info("Header matched successfully");
 		} catch (Exception e) {
 			e.printStackTrace();

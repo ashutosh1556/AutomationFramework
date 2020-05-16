@@ -20,7 +20,7 @@ public class TC_LoginWithHashmap_004 extends BaseClass {
 		logger.info("UserName Entered");
 		lp.setPassword(map.get("password"));
 		logger.info("Password Entered");
-		lp.clickSubmit();
+		lp.clickLogin();
 		logger.info("Submitted");
 
 		if (isAlertPresent()) {
