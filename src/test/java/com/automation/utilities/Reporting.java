@@ -5,12 +5,9 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.relevantcodes.extentreports.LogStatus;
 import org.testng.ITestContext;
-import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.TestListenerAdapter;
 
@@ -50,18 +47,20 @@ public class Reporting extends TestListenerAdapter {
 
     public void onTestFailure(ITestResult tcName) {
         extentTest = extentReports.createTest(tcName.getName());
-//        extentTest.log(Status.FAIL, MarkupHelper.createLabel(tcName.getName(), ExtentColor.RED));
+        extentTest.log(Status.FAIL, MarkupHelper.createLabel(tcName.getName(), ExtentColor.RED));
+
         String imagePath = System.getProperty("user.dir") + "/Screenshots/" + tcName.getName() + ".png";
+
         File imageAtPath = new File(imagePath);
-//        extentTest.log(LogStatus.FAIL, "Text", "");
-//        if (imageAtPath.exists()) {
-//            try {
-//                extentTest.fail(tcName.getThrowable().getMessage() + extentTest.addScreenCaptureFromPath(imagePath));
-////                extentTest.fail(tcName.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(imagePath).build());
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
+
+        if (imageAtPath.exists()) {
+            try {
+                extentTest.fail(tcName.getThrowable().getMessage() + extentTest.addScreenCaptureFromPath(imagePath));
+//                extentTest.fail(tcName.getThrowable().getMessage(), MediaEntityBuilder.createScreenCaptureFromPath(imagePath).build());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void onTestSkipped(ITestResult tr) {
