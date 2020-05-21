@@ -12,12 +12,12 @@
 
     <properties>
         <SuiteXmlFile>TestNG.xml</SuiteXmlFile>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+<!--    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
     </properties>
 
     <build>
         <pluginManagement>
-            <plugins>
+            <plugins> 
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
