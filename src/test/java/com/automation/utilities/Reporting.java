@@ -27,14 +27,14 @@ public class Reporting extends TestListenerAdapter {
         String reportName = "TestReport_" + timeStamp + ".html";
 
         extentSparkReporter = new ExtentSparkReporter(System.getProperty("user.dir") + "/test-output/" + reportName);
-        extentSparkReporter.loadXMLConfig(System.getProperty("user.dir") + "/spark-config.xml/");
+        extentSparkReporter.loadXMLConfig(System.getProperty("user.dir") + "/spark-config.xml");
 
         extentReports = new ExtentReports();
         extentReports.attachReporter(extentSparkReporter);
 
-        extentReports.setSystemInfo("Hostname", "TIMES CARD");
-        extentReports.setSystemInfo("Environment", "Staging");
-        extentReports.setSystemInfo("User", "Ashutosh Verma");
+        extentReports.setSystemInfo("Hostname", "localhost");
+        extentReports.setSystemInfo("Environment", "QA");
+        extentReports.setSystemInfo("User", System.getProperty("user.name"));
 
         extentSparkReporter.config().setDocumentTitle("Automation test report");
         extentSparkReporter.config().setReportName("Test results");

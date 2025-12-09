@@ -32,12 +32,14 @@ public class TC_AddCustomer_003 extends BaseClass {
 
 		try {
 			String actual = nec.getTableHeading();
-			String expected = "Customer Registered Successfully123!!!";
+			String expected = "Customer Registered Successfully!!!";
 			Assert.assertEquals(actual, expected);
 			captureScreenshot(driver, "addCustDetails");
 			logger.info("Header matched successfully");
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Failed to verify customer registration: " + e.getMessage());
+			captureScreenshot(driver, "addCustDetails_Failed");
+			throw e;
 		}
 
 		nec.btnContinue();

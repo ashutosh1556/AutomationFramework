@@ -10,7 +10,7 @@ import com.automation.pageObjects.LoginPage;
 public class TC_LoginTest_001 extends BaseClass {
 
 	@Test
-	private void loginTest() throws IOException {
+	public void loginTest() throws IOException {
 		logger.info("Test Case Started");
 		LoginPage lp = new LoginPage(driver);
 		lp.setUserName(userName);
